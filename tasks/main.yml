@@ -1,0 +1,20 @@
+
+
+- name: Download and install the public signing key
+  command: rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
+
+- name: Install Kibana
+  become: yes
+  yum: name=elasticsearch-{{ kibana_version }} state=present update_cache=yes
+
+
+- name: Copy Kibana conf file
+  template: src=kibana.yml.j2 dest=/etc/kibana/kibana.yml owner=root group=root mode=0644
+
+- name: Enable kibana.service
+  become: yes
+  systemd:
+    name: kibana.service
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
