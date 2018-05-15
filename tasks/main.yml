@@ -9,6 +9,7 @@
 
 
 - name: Copy Kibana conf file
+  become: yes
   template: src=kibana.yml.j2 dest=/etc/kibana/kibana.yml owner=root group=root mode=0644
 
 - name: Enable kibana.service
