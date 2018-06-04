@@ -5,7 +5,7 @@
 
 - name: Install Kibana
   become: yes
-  yum: name=elasticsearch-{{ kibana_version }} state=present update_cache=yes
+  yum: name=kibana-{{ kibana_version }} state=present update_cache=yes
 
 
 - name: Copy Kibana conf file
